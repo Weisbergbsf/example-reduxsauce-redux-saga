@@ -1,4 +1,4 @@
-# Exemplo validação de formuário e endereço preenchido automaticamente ao informar o CEP.
+# Exemplo validação de formulário e endereço preenchido automaticamente ao informar o CEP.
 
 ![Farmers Market Finder Demo](demo.gif)
 
