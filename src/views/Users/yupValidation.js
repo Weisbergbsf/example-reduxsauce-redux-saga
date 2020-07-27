@@ -4,7 +4,7 @@ export const schema = yup.object().shape({
   name: yup
     .string()
     .required("O nome é obrigatório.")
-    .min(3, "Tamanho minimo de 3 caracteres.")
+    .min(3, "Tamanho mínimo de 3 caracteres.")
     .max(40, "Tamanho máximo de 40 caracteres."),
   email: yup
     .string()
@@ -12,6 +12,6 @@ export const schema = yup.object().shape({
     .email("Informe um endereço de email válido."),
   password: yup
     .string()
-    .required("A senha é obrigatório.")
-    .min(6, "Tamanho minimo de 6 caracteres."),
+    .required("A senha é obrigatória.")
+    .min(6, "Tamanho mínimo de 6 caracteres."),
 });

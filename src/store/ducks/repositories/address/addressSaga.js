@@ -1,4 +1,4 @@
-import { put } from "redux-saga/effects";
+import { put, call } from "redux-saga/effects";
 
 import axios from "axios";
 import { Creators } from "./address";
@@ -7,7 +7,7 @@ export function* loadAddressSaga(action) {
   yield put(Creators.loadAddressStart())
 
   try {
-    const response = yield axios.get(`https://viacep.com.br/ws/${action.cep}/json/`)
+    const response = yield call(() => axios.get(`https://viacep.com.br/ws/${action.cep}/json/`))
     yield put(Creators.loadAddressSuccess(response.data))
 
   } catch (error) {
