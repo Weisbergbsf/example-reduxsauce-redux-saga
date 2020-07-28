@@ -1,10 +1,10 @@
 import { createActions, createReducer } from "reduxsauce";
 
 export const { Types, Creators } = createActions({
-  loadAddressStart: [],
-  loadAddressError: ["error"],
-  loadAddressSuccess: ["address"],
-  loadAddress: ["cep"],
+  fetchAddressStart: [],
+  fetchAddressError: ["error"],
+  fetchAddressSuccess: ["address"],
+  fetchAddress: ["cep"],
 });
 
 const INITIAL_STATE = {
@@ -13,25 +13,25 @@ const INITIAL_STATE = {
   error: null,
 };
 
-const loadStart = (state = INITIAL_STATE) => {
+const fetchStart = (state = INITIAL_STATE) => {
   return { ...state, loading: true };
 };
 
-const loadError = (state = INITIAL_STATE, action) => {
+const fetchrror = (state = INITIAL_STATE, action) => {
   return { ...state, error: action.error, loading: false };
 };
 
-const loadSuccess = (state = INITIAL_STATE, action) => {
+const fetchSuccess = (state = INITIAL_STATE, action) => {
   return { ...state, address: action.address, loading: false };
 };
 
-const load = (state = INITIAL_STATE, action) => {
+const fetchAddress = (state = INITIAL_STATE, action) => {
   return { ...state, address: action.address };
 };
 
 export default createReducer(INITIAL_STATE, {
-  [Types.LOAD_ADDRESS_START]: loadStart,
-  [Types.LOAD_ADDRESS_ERROR]: loadError,
-  [Types.LOAD_ADDRESS]: load,
-  [Types.LOAD_ADDRESS_SUCCESS]: loadSuccess,
+  [Types.FETCH_ADDRESS_START]: fetchStart,
+  [Types.FETCH_ADDRESS_ERROR]: fetchrror,
+  [Types.FETCH_ADDRESS_SUCCESS]: fetchSuccess,
+  [Types.FETCH_ADDRESS]: fetchAddress,
 });

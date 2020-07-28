@@ -20,7 +20,7 @@ const UserForm = () => {
 
   useEffect(() => {
     if (cep) {
-      dispatch(Creators.loadAddress(cep));
+      dispatch(Creators.fetchAddress(cep));
     }
   }, [cep, dispatch]);
 

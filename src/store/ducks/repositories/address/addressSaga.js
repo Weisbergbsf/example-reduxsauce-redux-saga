@@ -4,13 +4,13 @@ import axios from "axios";
 import { Creators } from "./address";
 
 export function* loadAddressSaga(action) {
-  yield put(Creators.loadAddressStart())
+  yield put(Creators.fetchAddressStart())
 
   try {
     const response = yield call(() => axios.get(`https://viacep.com.br/ws/${action.cep}/json/`))
-    yield put(Creators.loadAddressSuccess(response.data))
+    yield put(Creators.fetchAddressSuccess(response.data))
 
   } catch (error) {
-    yield put(Creators.loadError(error))
+    yield put(Creators.fetchAddressError(error))
   }
 }
