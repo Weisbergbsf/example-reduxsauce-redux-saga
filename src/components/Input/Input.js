@@ -1,12 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { TextField } from "@material-ui/core";
-import TextMaskCustom from "../TextMaskCustom/TextMaskCustom";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-const Input = ({ name, errors, mask, loading, ...props }) => {
+import {maskFormat} from './mask'
+
+const Input = ({ name, value, errors, mask, loading, ...props }) => {
   const error = errors ? errors[name] : false;
+
   return (
     <TextField
       {...props}
@@ -17,9 +19,8 @@ const Input = ({ name, errors, mask, loading, ...props }) => {
       name={name}
       error={error ? true : false}
       helperText={error ? error.message : ""}
+      value={mask ? maskFormat(mask, value) : value }
       InputProps={{
-        inputComponent: mask ? TextMaskCustom : this,
-        inputProps: { mask: mask },
         endAdornment: (
           <div>
             {loading && (
@@ -36,7 +37,7 @@ const Input = ({ name, errors, mask, loading, ...props }) => {
 
 Input.propTypes = {
   name: PropTypes.string.isRequired,
-  mask: PropTypes.oneOf(["cep", "telefone"]),
+  mask: PropTypes.oneOf(["cep", "phone", "cpf", 'cnpj']),
   loading: PropTypes.bool,
 };
 

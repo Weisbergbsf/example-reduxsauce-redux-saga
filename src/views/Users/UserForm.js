@@ -4,7 +4,7 @@ import Container from "@material-ui/core/Container";
 import { Grid, Button } from "@material-ui/core";
 
 import { useDispatch, useSelector } from "react-redux";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { schema } from "./yupValidation";
 import { yupResolver } from "@hookform/resolvers";
 
@@ -26,19 +26,13 @@ const UserForm = () => {
 
   const { address, loading } = useSelector((state) => state.address);
 
-  const { handleSubmit, register, errors } = useForm({
+  const { handleSubmit, control, register, errors } = useForm({
     mode: "onChange",
     resolver: yupResolver(schema),
+
   });
   const onSubmit = (values) => {
     alert(JSON.stringify(values));
-  };
-
-  const onHadleChangeCep = (e) => {
-    let cep = e.target.value.replace(/\D/g, "");
-    if (cep.length === 8) {
-      setCep(cep);
-    }
   };
 
   return (
@@ -50,52 +44,134 @@ const UserForm = () => {
           onSubmit={handleSubmit(onSubmit)}
         >
           <Grid container spacing={2}>
+
             <Grid item xs={12}>
-              <Input
+              <Controller
                 name="name"
-                label="Nome"
-                required
-                errors={errors}
-                inputRef={register}
+                control={control}
+                defaultValue=""
+                render={({ onChange, value }) => (
+                  <Input
+                    name="name"
+                    label="Nome"
+                    required
+                    errors={errors}
+                    value={value}
+                    onChange={onChange}
+                  />
+                )}
               />
             </Grid>
             <Grid item xs={12}>
-              <Input
+              <Controller
                 name="email"
-                label="Email"
-                required
-                errors={errors}
-                inputRef={register}
+                control={control}
+                defaultValue=""
+                render={({ onChange, value }) => (
+                  <Input
+                    name="email"
+                    label="Email"
+                    required
+                    errors={errors}
+                    value={value}
+                    onChange={onChange}
+                  />
+                )}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Input
-                type="password"
+              <Controller
                 name="password"
-                label="Senha"
-                required
-                errors={errors}
-                inputRef={register}
+                control={control}
+                defaultValue=""
+                render={({ onChange, value }) => (
+                  <Input
+                    type="password"
+                    name="password"
+                    label="Senha"
+                    required
+                    errors={errors}
+                    inputRef={register}
+                    value={value}
+                    onChange={onChange}
+                  />
+                )}
               />
             </Grid>
 
             <Grid item xs={12} sm={6}>
-              <Input
+              <Controller
                 name="telefone"
-                label="Telefone"
-                mask="telefone"
-                inputRef={register}
+                control={control}
+                defaultValue=""
+                render={({ onChange, value }) => (
+                  <Input
+                    name="telefone"
+                    label="Telefone"
+                    mask="phone"
+                    value={value}
+                    onChange={onChange}
+                  />
+                )}
               />
             </Grid>
-
             <Grid item xs={12}>
-              <Input
+              <Controller
+                name="cpf"
+                control={control}
+                defaultValue=""
+                render={({ onChange, value }) => (
+                  <Input
+                    name="cpf"
+                    label="CPF"
+                    required
+                    mask="cpf"
+                    errors={errors}
+                    value={value}
+                    onChange={onChange}
+                  />
+                )}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Controller
+                name="cnpj"
+                control={control}
+                defaultValue=""
+                render={({ onChange, value }) => (
+                  <Input
+                    name="cnpj"
+                    label="CNPJ"
+                    required
+                    mask="cnpj"
+                    errors={errors}
+                    value={value}
+                    onChange={onChange}
+                  />
+                )}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Controller
                 name="cep"
-                label="Cep"
-                errors={errors}
-                inputRef={register}
-                mask="cep"
-                onChange={onHadleChangeCep}
+                control={control}
+                defaultValue=""
+                render={({ onChange, value }) => (
+                  <Input
+                    name="cep"
+                    label="Cep"
+                    errors={errors}
+                    mask="cep"
+                    value={value}
+                    onChange={({ target }) => {
+                      let cep = target.value.replace(/\D/g, "");
+                      if (cep.length === 8) {
+                        setCep(cep);
+                      }
+                      console.log(target.value)
+                    }}
+                  />
+                )}
               />
             </Grid>
 
